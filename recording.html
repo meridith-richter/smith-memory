@@ -62,11 +62,29 @@
 	<body>
         	<h1 class="text-center">Smith College Video Memory Booth</h1>
                 <br>
-               	<!--<div style="width: 100%">-->
-                <div id="recorder"></div>
-                	<!--<ziggeorecorder ziggeo-effect-profile='_smith_watermark,_library_watermark' ziggeo-preview-effect-profile='_smith_watermark,_library_watermark'></ziggeorecorder>-->
-                        <!--</div>-->
-                <button class="btn btn-primary btn-lg-x margin-top-10" style="display: none">Submit</button>
-		<div id="step3" style="display: none">Thank you for your submission!</div>
+		<div id = "wrapper">
+			<ziggeorecorder
+			ziggeo-timelimit=15
+		  	ziggeo-width=320
+		  	ziggeo-height=240
+		  	ziggeo-theme='modern'
+		  	id='myRecorder'
+			></ziggeorecorder>
+		</div>
+	<script>
+		ziggeoApp.on("ready", function() {
+	  	// Let's get the ziggeorecorder element reference
+	  	var element = document.getElementById('myRecorder');
+
+	  	// Now let's get the actual Ziggeo embedding / object that we can use
+	  	var recorder = ZiggeoApi.V2.Recorder.findByElement(element);
+
+	  	// Now you can listen for the verified event
+	  	recorder.on("verified", function() {
+	   	var videoToken = recorder.get('video'); // Video token is available after the event is triggered
+	   	alert("The video with token " + videoToken + " has been submitted!");
+	 	});
+		});
+	</script>
 	</body>
 </html>
