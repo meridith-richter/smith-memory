@@ -6,7 +6,11 @@
 		<title>Smith College Memory Booth</title>
 
 		<script>
-			$(document).ready( function() {
+			var ziggeoApp = new ZiggeoApi.V2.Application({
+			token: "a46e8201c6a2fe5c1ff19463c10d5e4c",
+			});
+			
+			/*$(document).ready( function() {
 				//add our embedding to the page
 				var recorder = new ZiggeoApi.V2.Recorder({
 					//we find the element with id="recorder" to attach v2 recorder to it
@@ -36,7 +40,7 @@
 				});
 
 				//we activate the recorder
-				recorder.activate();
+				recorder.activate();*/
 				
 				recorder.on("verified", function() {
 					//once video is uploaded and seen that it can be processed the verified event fires we show the
