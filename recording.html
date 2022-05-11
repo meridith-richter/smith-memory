@@ -1,90 +1,51 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang = "en">
 	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<title>Smith College Memory Booth</title>
+	<meta charset="utf-8">
+	<meta name = "viewport" content = "width=device-width, initial-scale=1">
+		<title>
+			Smith College Memory Recording Booth
+		</title>
 
+		<link href = "zvideo.css" rel = "stylesheet">
+
+		<link rel="stylesheet" href="//assets.ziggeo.com/v2-stable/ziggeo.css" />
+		<script src="//assets.ziggeo.com/v2-stable/ziggeo.js"></script>
 		<script>
-			var ziggeoApp = new ZiggeoApi.V2.Application({
-			token: "a46e8201c6a2fe5c1ff19463c10d5e4c",
-			});
-			
-			/*$(document).ready( function() {
-				//add our embedding to the page
-				var recorder = new ZiggeoApi.V2.Recorder({
-					//we find the element with id="recorder" to attach v2 recorder to it
-					element: document.getElementById("recorder"),
-					attrs: {
-						//we make the recorder responsive
-						responsive: true,
-						'video-profile': "_smith_memory",
-						recordingheight: "720",
-						recordingwidth: "1280",
-						//maxwidth: "1080px",
-						//height: "480",
-						//width: "640",
-						'effect-profile': "_library_watermark",
-						'preview-effect-profile': "_library_watermark",
-						//we set the max time for recording to 120 seconds
-						timelimit: 2 * 60,
-						theme: "modern",
-						picksnapshots: false,
-						//we add name and email to the video as a custom data
-						"custom-data": {
-							name: $("#name").val(),
-							email: $("#email").val(),
-							videocopy: $("#videocopy").val(),
-							}
-						}
-				});
-
-				//we activate the recorder
-				recorder.activate();*/
-				
-				recorder.on("verified", function() {
-					//once video is uploaded and seen that it can be processed the verified event fires we show the
-					// button to Submit the form
-					$("#step2 button").show();
-					});
-				});
-
-				//When Submit button is clicked
-				$("#step2 button").on("click", function() {
-					//hide second screen showing recorder
-					$("#step2").hide();
-					//show the "Thank you" screen
-					$("#step3").show();
-				});
-			});
+  			var ziggeoApp = new ZiggeoApi.V2.Application({
+    		token: "a46e8201c6a2fe5c1ff19463c10d5e4c",
+  			});
 		</script>
+
+		<!--<script src = "zvideo.js"></script>-->
 	</head>
+	
 	<body>
-        	<h1 class="text-center">Smith College Video Memory Booth</h1>
-                <br>
-		<div id = "wrapper">
-			<ziggeorecorder
-			ziggeo-timelimit=15
-		  	ziggeo-width=320
-		  	ziggeo-height=240
-		  	ziggeo-theme='modern'
-		  	id='myRecorder'
-			></ziggeorecorder>
-		</div>
+	<div id = "wrapper">
+
+		<ziggeorecorder
+		  ziggeo-timelimit=15
+		  ziggeo-width=320
+		  ziggeo-height=240
+		  ziggeo-theme='modern'
+		  id='myRecorder'
+		></ziggeorecorder>
+	</div>
+
 	<script>
-		ziggeoApp.on("ready", function() {
-	  	// Let's get the ziggeorecorder element reference
-	  	var element = document.getElementById('myRecorder');
+	ziggeoApp.on("ready", function() {
+	  // Let's get the ziggeorecorder element reference
+	  var element = document.getElementById('myRecorder');
 
-	  	// Now let's get the actual Ziggeo embedding / object that we can use
-	  	var recorder = ZiggeoApi.V2.Recorder.findByElement(element);
+	  // Now let's get the actual Ziggeo embedding / object that we can use
+	  var recorder = ZiggeoApi.V2.Recorder.findByElement(element);
 
-	  	// Now you can listen for the verified event
-	  	recorder.on("verified", function() {
-	   	var videoToken = recorder.get('video'); // Video token is available after the event is triggered
-	   	alert("The video with token " + videoToken + " has been submitted!");
-	 	});
-		});
+	  // Now you can listen for the verified event
+	  recorder.on("verified", function() {
+	    var videoToken = recorder.get('video'); // Video token is available after the event is triggered
+	    alert("The video with token " + videoToken + " has been submitted!");
+	  });
+	});
 	</script>
 	</body>
 </html>
