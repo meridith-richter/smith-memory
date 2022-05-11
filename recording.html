@@ -3,59 +3,45 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<link href="//ziggeo.com/assets/css/styles.min.css" rel="stylesheet">
-      	<link rel="stylesheet" href="https://use.typekit.net/upv3whe.css">
-		[[header]]
-		<!-- You can set up any title for your form that you would want by changing the following text -->
 		<title>Smith College Memory Booth</title>
-		<!-- You can change this text to point to some other location to show a different icon in the browser tab if you
-		 want to -->
-		<link rel="shortcut icon" href="https://drive.google.com/file/d/1lHqM30lutX_Ty_CaJ09SyIdYEJuUOyV3">
 
 		<script>
 			$(document).ready( function() {
-				//assigning the event handler for click on the Next button on first screen
-				$("#step1 button").on("click", function() {
-					//hide first screen
-					$("#step1").hide();
-					//show second screen
-					$("#step2").show();
-
-					//add our embedding to the page
-					var recorder = new ZiggeoApi.V2.Recorder({
-						//we find the element with id="recorder" to attach v2 recorder to it
-						element: document.getElementById("recorder"),
-						attrs: {
-							//we make the recorder responsive
-							responsive: true,
-                          	'video-profile': "_smith_memory",
-                          	recordingheight: "720",
-                          	recordingwidth: "1280",
-                          	//maxwidth: "1080px",
-                          	//height: "480",
-                          	//width: "640",
-                          	'effect-profile': "_library_watermark",
-                          	'preview-effect-profile': "_library_watermark",
-							//we set the max time for recording to 120 seconds
-							timelimit: 2 * 60,
-							theme: "modern",
-                          	picksnapshots: false,
-							//we add name and email to the video as a custom data
-							"custom-data": {
-								name: $("#name").val(),
-								email: $("#email").val(),
-                              	videocopy: $("#videocopy").val(),
+				//add our embedding to the page
+				var recorder = new ZiggeoApi.V2.Recorder({
+					//we find the element with id="recorder" to attach v2 recorder to it
+					element: document.getElementById("recorder"),
+					attrs: {
+						//we make the recorder responsive
+						responsive: true,
+						'video-profile': "_smith_memory",
+						recordingheight: "720",
+						recordingwidth: "1280",
+						//maxwidth: "1080px",
+						//height: "480",
+						//width: "640",
+						'effect-profile': "_library_watermark",
+						'preview-effect-profile': "_library_watermark",
+						//we set the max time for recording to 120 seconds
+						timelimit: 2 * 60,
+						theme: "modern",
+						picksnapshots: false,
+						//we add name and email to the video as a custom data
+						"custom-data": {
+							name: $("#name").val(),
+							email: $("#email").val(),
+							videocopy: $("#videocopy").val(),
 							}
 						}
-					});
+				});
 
-					//we activate the recorder
-					recorder.activate();
-
-					recorder.on("verified", function() {
-						//once video is uploaded and seen that it can be processed the verified event fires we show the
-						// button to Submit the form
-						$("#step2 button").show();
+				//we activate the recorder
+				recorder.activate();
+				
+				recorder.on("verified", function() {
+					//once video is uploaded and seen that it can be processed the verified event fires we show the
+					// button to Submit the form
+					$("#step2 button").show();
 					});
 				});
 
@@ -70,69 +56,13 @@
 		</script>
 	</head>
 	<body>
-		<div class="container-fluid">
-			<div class="row">
-				<div class="col-md-offset-3 col-md-6 col-xs-12">
-                  	<span style="font-family: clarendon-urw-extra-narrow, serif; font-weight: 300; font-style: normal;">
-                  		<h1 class="text-center">Smith College Video Memory Booth</h1>
-                      	<br>
-                  	</span>
-					<!--<p class="text-center">Please fill out this form to submit a video.</p>-->
-					<!--<div class="login-box">-->
-						<div class="login-box-content">
-							<div id="step1">
-								<div class="form-group">
-									<label for="name">Your Name and Class Year</label>
-                                  	<br>
-                                   	Please add any additonal participant names/class years seperated by commas.
-                                  	<br>
-                                  	<br>
-									<input type="text" class="form-control" id="name" placeholder="Enter name" required>
-								</div>
-                              	<!--<div class="form-group">
-									<label for="classyear">Class Year(s)</label>
-									<input type="text" class="form-control" id="classyear" placeholder="Enter class year" required>
-								</div>-->
-                              	<br>
-                                <div class="form-group">
-									<label for="videocopy">Would you like a copy of your recording?</label>&nbsp;
-									<!--<input type="checkbox" id="videocopy" value="true">-->
-                                    <select name="videocopy" id="videocopy">
-                                     	<option value="no">No</option>
-                                     	<option value="yes">Yes</option>
-                                    </select>
-                                  	<br>
-                                  	*If yes, please add your email(s) below to recieve a copy of the recording.
-								</div>
-                              	<br>
-                              	<div class="form-group">
-									<label for="email">Email Address</label>
-                                  	<br>
-                                  	Please add any additonal participant emails seperated by commas.
-                                  	<br>
-                                  	<br>
-									<input type="email" class="form-control" id="email" placeholder="Enter email" required>
-								</div>
-								<button class="btn btn-primary btn-lg-x margin-top-10">Next</button>
-							</div>
-							<div id="step2" style="display: none">
-                             	<div class="form-group">
-                                     <!-- <label for="video">Record your video below</label> -->
-                                      <div>
-                                          <!--<div style="width: 100%">-->
-                                              <div id="recorder"></div>
-                                              <!--<ziggeorecorder ziggeo-effect-profile='_smith_watermark,_library_watermark' ziggeo-preview-effect-profile='_smith_watermark,_library_watermark'></ziggeorecorder>-->
-                                          <!--</div>-->
-                                      </div>
-                                      <button class="btn btn-primary btn-lg-x margin-top-10"
-                                          style="display: none">Submit</button>
-                                </div>
-							</div>
-							<div id="step3" style="display: none">Thank you for your submission!</div>
-						</div>
-					<!--</div>-->
-				</div>
-			</div>
-		</div>
+        	<h1 class="text-center">Smith College Video Memory Booth</h1>
+                <br>
+               	<!--<div style="width: 100%">-->
+                <div id="recorder"></div>
+                	<!--<ziggeorecorder ziggeo-effect-profile='_smith_watermark,_library_watermark' ziggeo-preview-effect-profile='_smith_watermark,_library_watermark'></ziggeorecorder>-->
+                        <!--</div>-->
+                <button class="btn btn-primary btn-lg-x margin-top-10" style="display: none">Submit</button>
+		<div id="step3" style="display: none">Thank you for your submission!</div>
 	</body>
 </html>
